@@ -54,18 +54,25 @@ def get_menu(cleanUrl):
         items += category["menuItems"]
     return items
 
+def load_restaurants():
+    restaurants_file = 'restaurants.json'
+    if os.path.isfile(restaurants_file):    # if file exist
+        with open(restaurants_file) as f:
+            restaurants = json.load(f)
+    else:                                   # if file doesn't exist
+        restaurants = get_restaurants()
+        with open(restaurants_file, 'w') as json_file:
+            json.dump(restaurants, json_file)
+    return restaurants
 
-restaurants_file = 'restaurants.json'
-if os.path.isfile(restaurants_file):
-    # print ("File exist")
-    with open(restaurants_file) as f:
-        restaurants = json.load(f)
-else:
-    # print ("File not exist")
-    restaurants = get_restaurants()
-    with open(restaurants_file, 'w') as json_file:
-        json.dump(restaurants, json_file)
+def save_restaurants_menu_json(restaurants_menu):
+    restaurants_menu_json = 'missingflurry.json'
+    if os.path.isfile(restaurants_menu_json):    # if file exist
+        with open(restaurants_menu_json, 'w') as json_file:
+            json_file.write("let restaurants={}".format(json.dumps(restaurants_menu, indent=4)))
 
+
+restaurants = load_restaurants()
 restaurants_menu = []
 for restaurant in restaurants :
     menu = get_menu(restaurant["url"])
@@ -79,6 +86,8 @@ for restaurant in restaurants :
     # if len(restaurant["unavailable"]) > 0:
     restaurants_menu.append(restaurant)
 
-print("let restaurants={}".format(json.dumps(restaurants_menu, indent=4)))
+save_restaurants_menu_json(restaurants_menu)
+
+
 
  

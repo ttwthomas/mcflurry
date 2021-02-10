@@ -334,17 +334,23 @@ function addMarker(map, location, name, icon, unavailable) {
       map: map,
       icon: icon,
     });
+    let unavailable_div="<div>"
+    for (i in unavailable){
+        unavailable_div += unavailable[i]+"</br>"
+    }
+    unavailable_div += "</div>"
     const contentString =
     '<div id="content">' +
     '<h1 id="firstHeading" class="firstHeading">'+ name +'</h1>' +
     '<div id="bodyContent">' +
-    '<p>'+ unavailable[0] + '</p>' +
+    '<p>Missing items:</p>'+
+    unavailable_div +
     '</div>' +
     '</div>';
     const infowindow = new google.maps.InfoWindow({
         content: contentString,
     });
-    marker.addListener("click", () => {
+    marker.addListener( "click", () => {
         infowindow.open(map, marker);
     });
     marker.setAnimation(google.maps.Animation.DROP);
