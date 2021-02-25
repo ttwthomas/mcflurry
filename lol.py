@@ -68,6 +68,7 @@ def load_restaurants():
 def save_restaurants_menu_json(restaurants_menu):
     restaurants_menu_json = 'missingflurry.json'
     if os.path.isfile(restaurants_menu_json):    # if file exist
+        print("lol")
         with open(restaurants_menu_json, 'w') as json_file:
             json_file.write("let restaurants={}".format(json.dumps(restaurants_menu, indent=4)))
 
