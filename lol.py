@@ -68,25 +68,26 @@ def load_restaurants():
 def save_restaurants_menu_json(restaurants_menu):
     restaurants_menu_json = 'missingflurry.json'
     if os.path.isfile(restaurants_menu_json):    # if file exist
-        print("lol")
         with open(restaurants_menu_json, 'w') as json_file:
             json_file.write("let restaurants={}".format(json.dumps(restaurants_menu, indent=4)))
 
+def get_unavailable_menu(restaurants):
+    restaurants_menu = []
+    for restaurant in restaurants :
+        menu = get_menu(restaurant["url"])
+        indispo = []
+        for item in menu :
+            if item["available"] is not True:
+                item = item["name"]
+                if "Flurr" in item and "Egg" not in item:
+                    indispo.append(item)
+        restaurant["unavailable"] = indispo 
+        # if len(restaurant["unavailable"]) > 0:
+        restaurants_menu.append(restaurant)
+    return restaurants_menu
 
 restaurants = load_restaurants()
-restaurants_menu = []
-for restaurant in restaurants :
-    menu = get_menu(restaurant["url"])
-    indispo = []
-    for item in menu :
-        if item["available"] is not True:
-            item = item["name"]
-            if "Flurr" in item and "Egg" not in item:
-                indispo.append(item)
-    restaurant["unavailable"] = indispo 
-    # if len(restaurant["unavailable"]) > 0:
-    restaurants_menu.append(restaurant)
-
+restaurants_menu = get_unavailable_menu(restaurants)
 save_restaurants_menu_json(restaurants_menu)
 
 
