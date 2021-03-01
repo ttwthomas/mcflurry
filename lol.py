@@ -1,5 +1,5 @@
 import requests
-import json, os
+import json, os, time
 
 def get_restaurants():
     url= "https://api.skipthedishes.com/customer/v1/graphql"
@@ -86,9 +86,13 @@ def get_unavailable_menu(restaurants):
         restaurants_menu.append(restaurant)
     return restaurants_menu
 
-restaurants = load_restaurants()
-restaurants_menu = get_unavailable_menu(restaurants)
-save_restaurants_menu_json(restaurants_menu)
+if __name__ == "__main__":
+    while True: 
+        restaurants = load_restaurants()
+        restaurants_menu = get_unavailable_menu(restaurants)
+        save_restaurants_menu_json(restaurants_menu)
+        print("sleeping for 10m")
+        time.sleep(600)
 
 
 

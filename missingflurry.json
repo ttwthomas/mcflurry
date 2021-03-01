@@ -383,11 +383,7 @@ let restaurants=[
             "longitude": -73.5111616
         },
         "open": true,
-        "unavailable": [
-            "McFlurry OREO [330.0 Cal]",
-            "McFlurry M&M [410.0 Cal]",
-            "McFlurry SKOR [370.0 Cal]"
-        ]
+        "unavailable": []
     },
     {
         "name": "850 rue Ste-Catherine E",
@@ -661,7 +657,9 @@ let restaurants=[
             "longitude": -73.6504275
         },
         "open": true,
-        "unavailable": []
+        "unavailable": [
+            "McFlurry SKOR [370.0 Cal]"
+        ]
     },
     {
         "name": "boul. du Mill\u00e9naire",
