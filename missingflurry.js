@@ -1,4 +1,4 @@
-let restaurants=[
+export const restaurants = [
     {
         "name": "405 rue Jean-Talon O",
         "url": "mcdonalds-405-rue-jean-talon-ouest",
