@@ -4,7 +4,7 @@ import lol as resto
 
 
 def save_restaurants(cur, restaurants):
-    create_table_query=" CREATE TABLE IF NOT EXISTS demo( id SERIAL PRIMARY KEY, DATA JSON);"
+    create_table_query="DROP TABLE IF EXISTS demo; CREATE TABLE IF NOT EXISTS demo( id SERIAL PRIMARY KEY, DATA JSON);"
     cur.execute(create_table_query)
     for restaurant in restaurants:
         save_restaurants_query="insert into demo(DATA) values (%s);"

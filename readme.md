@@ -2,10 +2,12 @@
 ## Launch flask app
 ```
 pip install -r requirements.txt
-PGDATABASE=mcflurry PGHOST=127.0.0.1 PGPASSWORD=postgres PGUSER=postgres flask 
+limit 10 FLASK_RUN_PORT=8000 FLASK_APP=server.py FLASK_ENV=development PGDATABASE=mcflurry PGHOST=127.0.0.1 PGPASSWORD=postgres PGUSER=postgres flask run --host=0.0.0.0
 ```
-
 ## environment variables :
+- FLASK_APP=server.py 
+- FLASK_ENV=development
+- FLASK_RUN_PORT=8000
 - PGDATABASE=mcflurry 
 - PGHOST=127.0.0.1 
 - PGPASSWORD=postgres 
