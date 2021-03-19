@@ -1,4 +1,5 @@
 from flask import Flask, request, send_from_directory, Response
+from flask_cors import CORS
 import postgres
 import lol as resto
 import logging
@@ -7,6 +8,7 @@ import sys
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
+CORS(app, resources=r'/*')
 logging.basicConfig(level=logging.INFO)
 
 @app.route('/<file>')
