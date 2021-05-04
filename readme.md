@@ -19,3 +19,6 @@ limit 10 FLASK_RUN_PORT=8000 FLASK_APP=server.py FLASK_ENV=development PGDATABAS
 
 ## check status of app and db connection
 `/health`
+
+## AWS Lambda
+Voir (lambda/readme.md)[lambda/readme.md]
