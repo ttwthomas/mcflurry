@@ -21,7 +21,7 @@ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:p
 
 ## Création de la lambda
 ```
-aws lambda create-function --function-name update-mcflurry --zip-file fileb://mcflurry.zip --handler ma_lambda.lambda_handler --runtime python3.8 --role arn:aws:iam::208249120383:role/lambda-ex --timeout 600
+aws lambda create-function --function-name update-mcflurry --zip-file fileb://mcflurry.zip --handler ma_lambda.lambda_handler --runtime python3.8 --role arn:aws:iam::1232456789:role/lambda-ex --timeout 600
 ```
 
 ## Invocation de la Lambda
