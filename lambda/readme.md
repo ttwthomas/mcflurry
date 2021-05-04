@@ -20,6 +20,7 @@ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:p
 ```
 
 ## Création de la lambda
+Remplacer 1232456789 par son ID de compte AWS
 ```
 aws lambda create-function --function-name update-mcflurry --zip-file fileb://mcflurry.zip --handler ma_lambda.lambda_handler --runtime python3.8 --role arn:aws:iam::1232456789:role/lambda-ex --timeout 600
 ```
