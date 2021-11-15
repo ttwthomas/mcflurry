@@ -69,6 +69,7 @@ def save_restaurants_menu_json(restaurants_menu):
     restaurants_menu_json = 'missingflurry.js'
     with open(restaurants_menu_json, 'w') as json_file:
         json_file.write("export const restaurants = {}".format(json.dumps(restaurants_menu, indent=4)))
+        print("saved missingflurry.js")
 
 def get_unavailable_menu(restaurants):
     restaurants_menu = []
@@ -86,9 +87,15 @@ def get_unavailable_menu(restaurants):
     return restaurants_menu
 
 if __name__ == "__main__":
-    while True: 
-        restaurants = load_restaurants()
-        restaurants_menu = get_unavailable_menu(restaurants)
-        save_restaurants_menu_json(restaurants_menu)
-        print("sleeping for 10m")
-        time.sleep(600)
+    restaurants = load_restaurants()
+    restaurants_menu = get_unavailable_menu(restaurants)
+    save_restaurants_menu_json(restaurants_menu)
+
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory="./", **kwargs)
+            
+    PORT=os.environ.get('PORT',8000)
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print("serving at port", PORT)
+        httpd.serve_forever()
