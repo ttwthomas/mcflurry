@@ -97,7 +97,7 @@ if __name__ == "__main__":
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory="./", **kwargs)
             
-    PORT=os.environ.get('PORT',8000)
+    PORT=int(os.environ.get('PORT',8000))
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print("serving at port", PORT)
+        print("serving on port", PORT)
         httpd.serve_forever()
