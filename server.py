@@ -1,7 +1,7 @@
 from flask import Flask, request, send_from_directory, Response
 from flask_cors import CORS
 import postgres
-import lol as resto
+import main as resto
 import logging
 from os import getenv
 import sys
