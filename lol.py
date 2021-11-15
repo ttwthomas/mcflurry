@@ -66,10 +66,9 @@ def load_restaurants():
     return restaurants
 
 def save_restaurants_menu_json(restaurants_menu):
-    restaurants_menu_json = 'missingflurry.json'
-    if os.path.isfile(restaurants_menu_json):    # if file exist
-        with open(restaurants_menu_json, 'w') as json_file:
-            json_file.write("export const restaurants = {}".format(json.dumps(restaurants_menu, indent=4)))
+    restaurants_menu_json = 'missingflurry.js'
+    with open(restaurants_menu_json, 'w') as json_file:
+        json_file.write("export const restaurants = {}".format(json.dumps(restaurants_menu, indent=4)))
 
 def get_unavailable_menu(restaurants):
     restaurants_menu = []
