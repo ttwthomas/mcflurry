@@ -22,7 +22,7 @@ def get_restaurants(cur):
 
 def init():
     try:
-        conn = psycopg2.connect(dbname="mcflurry")
+        conn = psycopg2.connect(dbname="mcflurry", connect_timeout=3)
         conn.autocommit = True
         cur = conn.cursor()
     except:
