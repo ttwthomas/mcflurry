@@ -1,6 +1,6 @@
 import psycopg2
 import json
-import lol as resto
+import main as resto
 
 
 def save_restaurants(cur, restaurants):
