@@ -3,31 +3,48 @@ import json, os, time, sys
 import http.server
 import socketserver
 
-def get_restaurants():
-    url= "https://api.skipthedishes.com/customer/v1/graphql"
-    headers = {
-        'pragma': 'no-cache',
-        'cache-control': 'no-cache',
-        'parameters': 'isCuisineSearch=false&isSorted=false&search=mc',
-        'app-token': 'd7033722-4d2e-4263-9d67-d83854deb0fc',
-        'content-type': 'application/json',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
-    }
-    data= '''{
-        "operationName":"QueryRestaurantsCuisinesList",
-        "variables":{
-            "city":"montreal",
-            "province":"QC",
-            "dateTime":0,
-            "isDelivery":true,
-            "search":"mcdonalds",
-            "sortBy":{"index":-1,"value":null},
-            "language":"en","address":{}
-        },
-        "extensions":{"persistedQuery":{"version":1,"sha256Hash":"7b26cd706d2cb6f061afbb257debd2d8172472a5a3f94059379c78767dde5954"}}
-        }'''
-    
-    req = requests.post(url,headers=headers,data=data)
+def get_restaurants():                                                                                                                                                             
+    url= "https://api.skipthedishes.com/customer/v1/graphql"                                                                                                                       
+    headers = {                                                                                                                                                                    
+        'authority': 'api.skipthedishes.com',                                                                                                                                      
+        'accept': '*/*',                                                                                                                                                           
+        'accept-language': 'en',                                                                                                                                                   
+        'app-token': 'd7033722-4d2e-4263-9d67-d83854deb0fc',                                                                                                                       
+        'content-type': 'application/json',                                                                                                                                        
+        'dnt': '1',                                                                                                                                                                
+        'origin': 'https://www.skipthedishes.com',                                                                                                                                 
+        'parameters': 'filterBy=&isCuisineSearch=false&isSorted=false&search=mc',                                                                                                  
+        'referer': 'https://www.skipthedishes.com/',                                                                                                                               
+        'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',                                                                                          
+        'sec-ch-ua-mobile': '?0',                                                                                                                                                  
+        'sec-ch-ua-platform': '"macOS"',                                                                                                                                           
+        'sec-fetch-dest': 'empty',                                                                                                                                                 
+        'sec-fetch-mode': 'cors',                                                                                                                                                  
+        'sec-fetch-site': 'same-site',                                                                                                                                             
+        'sec-gpc': '1',                                                                                                                                                            
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',                                     
+    }                                                                                                                                                                              
+                                                                                                                                                                                   
+    json_data = {                                                                                                                                                                  
+        'operationName': 'QueryRestaurantsCuisinesList',                                                                                                                           
+        'variables': {                                                                                                                                                             
+            'city': 'montreal',                                                                                                                                                    
+            'province': 'QC',                                                                                                                                                      
+            'isDelivery': True,                                                                                                                                                    
+            'dateTime': 0,                                                                                                                                                         
+            'search': 'mc',                                                                                                                                                        
+            'language': 'en',                                                                                                                                                      
+        },                                                                                                                                                                         
+        'extensions': {                                                                                                                                                            
+            'persistedQuery': {                                                                                                                                                    
+                'version': 1,                                                                                                                                                      
+                'sha256Hash': 'de41a8aae22964fa0f2815f1bad863a14ad29f0e95004559d4ada0b31b388c06',                                                                                  
+            },                                                                                                                                                                     
+        },                                                                                                                                                                         
+                                                                                                                                                                                   
+    }                                                                                                                                                                              
+                                                                                                                                                                                   
+    req = requests.post(url,headers=headers,json=json_data)
     restaurants = []
     for restaurant in req.json()["data"]["restaurantsList"]["openRestaurants"] :
         if "mcdonalds" in restaurant['cleanUrl'] and restaurant["location"]["position"]: 
