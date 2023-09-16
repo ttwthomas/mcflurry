@@ -1,5 +1,7 @@
-requests==2.18.4
+requests==2.25.1
+urllib3==1.26.5
 Flask==1.1.2
 psycopg2-binary
 Flask-Cors==3.0.10
 python-dotenv==0.19.2
+itsdangerous==2.0.1
