@@ -5,3 +5,4 @@ psycopg2-binary
 Flask-Cors==3.0.10
 python-dotenv==0.19.2
 itsdangerous==2.0.1
+werkzeug==2.0.3
