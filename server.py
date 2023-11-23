@@ -36,12 +36,16 @@ def refresh():
 
 @app.route('/health')
 def health():
-    cur = postgres.init()
-    health = postgres.healthcheck(cur)
-    if health == 1 :
+    try:
+      cur = postgres.init()
+      health = postgres.healthcheck(cur)
+      if health == 1 :
         return "ok", 200
-    else :
-        return "not ok", 500
+      else :
+        return "db not ok", 500
+    except:
+      return "db not ok", 500
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
